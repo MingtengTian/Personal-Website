@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  HOW TO EDIT THIS WEBSITE (for the owner)
+  ------------------------------------------------------------
+  1. Open this file in any text editor (Notepad, VS Code...).
+  2. Search for the marker:  EDIT:
+     Every place you may want to change is marked with it.
+  3. To change a photo: replace the URL inside src="..."
+     (currently a placeholder image).
+  4. To ADD one more photo row in Field Work / Gallery:
+     copy one whole <figure class="photo-row"> ... </figure>
+     block and paste it below, then change image + caption.
+  5. To ADD one more research block: copy one whole
+     <div class="research-block"> ... </div> block and paste.
+  6. Save the file and refresh your browser. That's all!
+  ============================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ✏️ EDIT: the title shown in the browser tab -->
+<title>Mingteng (Minton) Tian — PhD Application Website</title>
+<style>
+/* ---------- BASIC COLORS (change here if you want) ---------- */
+:root{
+  --bg:        #ffffff;   /* page background: white */
+  --nav-bg:    #f7f7f7;   /* navigation bar background */
+  --ink:       #1a1a1a;   /* main text color */
+  --muted:     #666666;   /* small / secondary text */
+  --line:      #dddddd;   /* thin borders */
+  --banner-txt:#ffffff;   /* big name color on banner */
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family: Georgia, "Times New Roman", serif; /* academic serif look */
+  font-size:20px; /* default browser size (16px) + 4px */
+  line-height:1.7;
+}
+
+a{ color:var(--ink); }
+
+/* ---------- TOP BANNER WITH BIG NAME (like the example) ---------- */
+.banner{
+  position:relative;
+  /* ✏️ EDIT: replace the placeholder URL below with your own banner
+     background photo (keep the dark overlay in front of it) */
+  background:
+    linear-gradient(rgba(25,45,65,.55), rgba(25,45,65,.55)),
+    url('images/background.jpg')
+    center/cover no-repeat;
+  padding-top:56px;              /* space for the nav bar */
+  height:280px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.banner h1{
+  color:var(--banner-txt);
+  font-size:calc(2.6rem + 4px);
+  font-weight:bold;
+  text-align:center;
+  letter-spacing:.5px;
+  padding:0 16px;
+}
+
+/* ---------- NAVIGATION BAR (sticky, like the example) ---------- */
+.navbar{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:56px;
+  background:var(--nav-bg);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  z-index:100;
+}
+.brand{
+  font-weight:bold;
+  font-size:calc(1rem + 4px);
+  text-decoration:none;
+}
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:26px;
+}
+.nav-link{
+  text-decoration:none;
+  font-size:calc(.92rem + 4px);
+  font-weight:bold;
+  padding:4px 2px;
+  border-bottom:3px solid transparent; /* reserved for active underline */
+}
+.nav-link:hover{ color:#000; }
+.nav-link.active{
+  border-bottom:3px solid #111;        /* black underline = current page */
+}
+
+/* ---------- MAIN CONTENT AREA ---------- */
+.container{
+  max-width:1000px;
+  margin:0 auto;
+  padding:48px 24px 64px;
+}
+
+/* page switching (transition between "pages") */
+.page{ display:none; }
+.page.active{
+  display:block;
+  animation:fadeIn .45s ease;
+}
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(10px); }
+  to  { opacity:1; transform:none; }
+}
+
+/* page titles (underlined bold, like "News" in the example) */
+.page-title{
+  font-size:calc(1.6rem + 4px);
+  font-weight:bold;
+  text-decoration:underline;
+  margin-bottom:8px;
+}
+.page-intro{
+  color:var(--muted);
+  font-size:calc(.95rem + 4px);
+  margin-bottom:36px;
+}
+
+/* ---------- HOME PAGE ---------- */
+.home-grid{
+  display:grid;
+  grid-template-columns: 1fr 300px;  /* left text | right photo */
+  gap:56px;
+}
+.home-name{
+  font-size:calc(1.5rem + 4px);
+  font-weight:bold;
+  margin-bottom:6px;
+}
+.home-position{
+  font-size:calc(1rem + 4px);
+  margin-bottom:4px;
+}
+.home-affil{
+  font-size:calc(.95rem + 4px);
+  margin-bottom:20px;
+}
+.home-bio{
+  font-size:calc(.98rem + 4px);
+  margin-bottom:12px;
+  text-align:justify;
+}
+
+/* the three bold subtitles on Home */
+.bold-sub{
+  font-size:calc(1.12rem + 4px);
+  font-weight:bold;
+  margin-top:34px;
+  margin-bottom:10px;
+}
+.home-section p,
+.home-section li{
+  font-size:calc(.95rem + 4px);
+}
+.home-section ul, .home-section ol{
+  padding-left:22px;
+}
+.home-section li{ margin-bottom:6px; }
+
+/* right sidebar: photo + small centered info (like the example) */
+.home-side img{
+  width:100%;
+  display:block;
+  border:1px solid var(--line);
+}
+.side-info{
+  margin-top:14px;
+  text-align:center;
+  font-size:calc(.82rem + 6px);
+  color:var(--ink);
+  line-height:1.9;
+}
+.side-info a{ color:var(--ink); }
+
+/* ---------- RESEARCH PAGE (image left, text right) ---------- */
+.research-block{
+  display:flex;
+  gap:36px;
+  margin-bottom:60px;
+  align-items:flex-start;
+}
+.research-media{
+  flex:0 0 42%;
+}
+.research-media img{
+  width:100%;
+  height:auto;
+  display:block;
+  border:1px solid var(--line);
+}
+.research-text{ flex:1; }
+.research-text h3{
+  font-size:calc(1.2rem + 4px);
+  font-weight:bold;
+  margin-bottom:10px;
+}
+.research-text p{
+  font-size:calc(.95rem + 4px);
+  margin-bottom:10px;
+  text-align:justify;
+}
+.research-text .proj-note{
+  font-size:calc(.85rem + 4px);
+  color:var(--muted);
+  font-style:italic;
+}
+.research-title-link{
+  color:inherit;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.research-title-link:hover{
+  color:#555;
+}
+
+/* ---------- CCFRL RESEARCH DETAIL PAGE ---------- */
+.detail-back{
+  display:inline-block;
+  margin-bottom:24px;
+  font-size:calc(.95rem + 4px);
+  font-weight:bold;
+}
+.research-detail-row{
+  margin-bottom:64px;
+}
+.research-detail-row img{
+  width:100%;
+  display:block;
+  border:1px solid var(--line);
+}
+.research-detail-row figcaption{
+  margin-top:14px;
+  font-size:calc(1rem + 8px); /* larger than Field Work / Gallery captions */
+  line-height:1.6;
+  color:var(--ink);
+  text-align:left;
+}
+
+/* ---------- FIELD WORK & GALLERY (one image per row,
+              small caption text below) ---------- */
+.photo-row{
+  margin-bottom:52px;
+}
+.photo-row img{
+  width:100%;
+  display:block;
+  border:1px solid var(--line);
+}
+.photo-row figcaption{
+  margin-top:8px;
+  font-size:calc(.8rem + 6px); /* all text +4px; captions +2px extra */
+  color:var(--muted);
+  text-align:center;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  border-top:1px solid var(--line);
+  padding:26px 16px;
+  text-align:center;
+  font-size:calc(.82rem + 4px);
+  color:var(--muted);
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width:800px){
+  .banner h1{ font-size:calc(1.7rem + 4px); }
+  .home-grid{ grid-template-columns:1fr; gap:32px; }
+  .home-side{ max-width:320px; }
+  .research-block{ flex-direction:column; }
+  .research-media{ flex:none; width:100%; }
+  .nav-links{ gap:14px; }
+  .nav-link{ font-size:calc(.82rem + 4px); }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION BAR ============ -->
+<nav class="navbar">
+  <!-- ✏️ EDIT: short name shown at the left of the bar -->
+  <a href="#home" class="brand nav-link" data-page="home">Mingteng (Minton) Tian</a>
+  <ul class="nav-links">
+    <li><a href="#home"      class="nav-link active" data-page="home">Home</a></li>
+    <li><a href="#research"  class="nav-link" data-page="research">Research</a></li>
+    <li><a href="#fieldwork" class="nav-link" data-page="fieldwork">Field Work</a></li>
+    <li><a href="#gallery"   class="nav-link" data-page="gallery">Gallery</a></li>
+  </ul>
+</nav>
+
+<!-- ============ BANNER WITH BIG NAME ============ -->
+<header class="banner">
+  <!-- ✏️ EDIT: your full name (shown big on the banner) -->
+  <h1></h1>
+</header>
+
+<main class="container">
+
+  <!-- ================= HOME PAGE ================= -->
+  <section class="page active" id="page-home">
+    <div class="home-grid">
+
+      <!-- LEFT: intro text + three bold-subtitle parts -->
+      <div class="home-main">
+        <!-- ✏️ EDIT: your name, position, affiliation -->
+        <h2 class="home-name">Mingteng (Minton) Tian</h2>
+        <p class="home-position">Prospective PhD Student in Seismology</p>
+        <p class="home-affil"><strong>Research Interest:</strong> Reinforce Learning, Seismology, Seismological Imaging, AI for Seismology</p>
+
+        <!-- ✏️ EDIT: a short self-introduction paragraph -->
+        <p class="home-bio">
+          Welcome to my personal website! I am a 3rd year master
+          student in Geophysics at Southern University of Science and Technology [SUSTECH]. My research focuses on
+          AI for seismology. This website collects my research
+          experiences, field work, and publications, prepared for my PhD application.
+          Thank you for visiting, and please feel free to contact me by email.
+        </p>
+
+        <!-- PART 1 -->
+        <div class="home-section">
+          <h3 class="bold-sub">Current Research</h3>
+          <!-- ✏️ EDIT: list your research interests -->
+          <ul>
+            <li>Surface Wave Inversion Based on Soft Actor-critic Reinforce Learning</li>
+            <li>End to End Inversion from Cross Correlation function to Shear Wave velocity based on Reinforce Learning</li>
+            <!-- <li>[Research interest 3 — e.g. Machine learning for geophysical data]</li> -->
+          </ul>
+        </div>
+
+        <!-- PART 2 -->
+        <div class="home-section">
+          <h3 class="bold-sub">Education</h3>
+          <!-- ✏️ EDIT: your degrees, newest first -->
+          <ul>
+            <li>[2024.9–2027.6] &nbsp; M.Sc. in Geophysics, Southern Univeristy of Science and Technology, China</li>
+            <li>[2020.9–2024.6] &nbsp; B.Sc. in Applied Geophysics, Jilin Univeristy, China</li>
+          </ul>
+        </div>
+
+        <!-- PART 3 -->
+        <div class="home-section">
+          <h3 class="bold-sub">Publishments</h3>
+          <!-- ✏️ EDIT: your publications; copy a <li> to add more -->
+          <ol>
+            <li>
+              <strong>[Mingteng Tian]</strong>, [Yingjie Yang], ([2026]).
+              "[DispSAC: Surface Wave Inversion Using Soft Actor-Critic Reinforce Learning]". <em>[DOI: https://doi.org/10.31223/X5MJ75]</em>.
+              <!-- <a href="#">[PDF]</a> -->
+            </li>
+            <!-- <li>
+              [Co-author C], <strong>[Your Name]</strong> ([Year]).
+              "[Title of paper 2]". <em>[Journal / Conference Name]</em>.
+              <a href="#">[PDF]</a>
+            </li> -->
+          </ol>
+        </div>
+      </div>
+
+      <!-- RIGHT: portrait photo + small contact info -->
+      <aside class="home-side">
+        <!-- ✏️ EDIT: replace with your portrait photo URL -->
+        <img src="images/minton.jpg"
+             alt="Portrait photo">
+        <div class="side-info">
+          <!-- ✏️ EDIT: your contact information -->
+          <p>Department: EPS</p>
+          <p>Sustech, Nanshan District</p>
+          <p>Shenzhen, China</p>
+          <p>Email: <a href="mailto:12432250@mail.sustech.edu.cn">12432250@mail.sustech.edu.cn</a></p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ================= RESEARCH PAGE ================= -->
+  <section class="page" id="page-research">
+    <h2 class="page-title">Research</h2>
+    <!-- ✏️ EDIT: one-line introduction of your research -->
+    <p class="page-intro">Two major research projects I have been working on.</p>
+
+    <!-- RESEARCH BLOCK 1 (image left, text right) -->
+    <div class="research-block">
+      <div class="research-media">
+        <!-- ✏️ EDIT: image for research project 1 -->
+        <img src="research/DispSAC/poster.png"
+             alt="Research project 1">
+      </div>
+      <div class="research-text">
+        <!-- ✏️ EDIT: title and description of project 1 -->
+        <h3>DispSAC Poster in PIM (Passive Imaging and Monitoring in Wave Physics:From Seismology to Ultrasound (Asia-Pacific) Summer School)</h3>
+        <p>
+          <strong>Research Gap:</strong> SWI based on MCMC is very time intensive; Linearized inversion is very easily stuck into local minimum; SWI based on Supervised Learning ignores non-uniqueness nature of inverse problem
+        </p>
+        <p>
+          <strong>Solution:</strong> To addrease this problem, We propose DispSAC to fully explore parameter space by leveraging fewer forword simulations over MCMC
+        </p>
+        <p class="proj-note"><strong>Related publication:</strong> [<strong>DOI:</strong> <a href="https://doi.org/10.31223/X5MJ75">https://doi.org/10.31223/X5MJ75</a>]</p>
+      </div>
+    </div>
+
+    <!-- RESEARCH BLOCK 2 (image left, text right) -->
+    <div class="research-block">
+      <div class="research-media">
+        <!-- ✏️ EDIT: image for research project 2 -->
+        <img src="research/CCFRL/ccfrl-wordmark.png"
+             alt="CCFRL artistic lettering in orange and deep teal"
+             width="1536" height="1024">
+      </div>
+      <div class="research-text">
+        <!-- ✏️ EDIT: title and description of project 2 -->
+        <h3><a href="#ccfrl" class="research-title-link internal-page-link" data-page="ccfrl">CCFRL for direct inference of shear wave velocity from ambient noise cross correlations</a></h3>
+        <p>
+          [<strong>Research Gap:</strong> Traditional Ambient Noise tomography extracts dispersion measurements before inverting for velocity structure, making the final models sensitive to dispersion picking and quality control.]
+        </p>
+        <p>
+          [<strong>Solution:</strong> We present CCFRL, a reinforcement-learning framework that estimates an effective one-dimensional shear-wave velocity model directly from a preprocessed interstation CCF, which skips the dispersion picking process directly]
+        </p>
+        <p class="proj-note"><strong>Related publication:</strong> Still working and polishing</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CCFRL RESEARCH DETAIL PAGE ================= -->
+  <section class="page" id="page-ccfrl">
+    <a href="#research" class="detail-back internal-page-link" data-page="research">&larr; Back to Research</a>
+    <h2 class="page-title">CCFRL Research Details</h2>
+    <p class="page-intro">
+      Detailed CCFRL results for direct inference of shear-wave velocity from ambient-noise cross-correlation functions.
+    </p>
+
+    <figure class="research-detail-row">
+      <img src="research/CCFRL/Misfit.png"
+           alt="CCFRL training and validation misfit curves" loading="lazy">
+      <figcaption><strong>Training and validation behavior.</strong> CCF misfit decreases across consecutive rollouts, showing progressive improvement both within and across training cohorts.</figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/CCFRL/test_syn_single.png"
+           alt="CCFRL single synthetic test-set result" loading="lazy">
+      <figcaption><strong>Single synthetic test example.</strong> This example illustrates how CCFRL reconstructs the CCF by fitting target CCF and infers the corresponding shear-wave velocity structure on unseen synthetic data.</figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/CCFRL/test_syn_group.png"
+           alt="CCFRL synthetic test-set ensemble results" loading="lazy">
+      <figcaption><strong>Synthetic test-set ensemble results.</strong> These results summarize CCFRL inference performance across an ensemble of vs initializations based on test datasets.</figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/CCFRL/syn_single.png"
+           alt="CCFRL single synthetic-data inference result" loading="lazy">
+      <figcaption><strong>Single synthetic-data example.</strong> The panels show the CCFRL inference performance on synthetic CCF constructed from real CCFs' extracted dispersion.</figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/CCFRL/syn_group.png"
+           alt="CCFRL synthetic-data ensemble results" loading="lazy">
+      <figcaption><strong>Synthetic-data ensemble results.</strong> The figure shows the CCFRL inference performance accross an ensemble of vs initializations based on synthetic CCF constructed from real CCFs' extracted dispersion.</figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/CCFRL/real_single.png"
+           alt="CCFRL single real-data inference result" loading="lazy">
+      <figcaption><strong>Single real-data example.</strong> This figure presents the reconstructed CCF, the evolution of the inference, the recovered dispersion curves, and the final shear-wave velocity model for one real observation.</figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/CCFRL/real_group.png"
+           alt="CCFRL real-data ensemble results" loading="lazy">
+      <figcaption><strong>Real-data ensemble results.</strong> The panels summarize CCF matching, inference behavior, recovered dispersion information, and the resulting family of shear-wave velocity models for real observations.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= FIELD WORK PAGE ================= -->
+  <section class="page" id="page-fieldwork">
+    <h2 class="page-title">Field Work</h2>
+    <!-- ✏️ EDIT: one-line introduction of your field work -->
+    <p class="page-intro">
+      Field work is one of most interesting part of Geophysics.
+    </p>
+
+    <!-- ✏️ EDIT: copy this whole <figure> block to add more photos -->
+    <figure class="photo-row">
+      <img src="fieldwork/work_photo2.jpg"
+           alt="Field work 1">
+      <figcaption>Installing a broadband seismometer</figcaption>
+    </figure>
+
+    <figure class="photo-row">
+      <img src="fieldwork/work_photo3.jpg"
+           alt="Field work 2">
+      <figcaption>A fieldwork photo in front of our truck</figcaption>
+    </figure>
+
+    <figure class="photo-row">
+      <img src="fieldwork/work_photo1.jpg"
+           alt="Field work 2">
+      <figcaption>Trying to repair a steel fence</figcaption>
+    </figure>
+
+    <figure class="photo-row">
+      <img src="fieldwork/selfie.jpg"
+           alt="Field work 3">
+      <figcaption>Working outdoors in the midday heat</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= GALLERY PAGE ================= -->
+  <section class="page" id="page-gallery">
+    <h2 class="page-title">Gallery</h2>
+    <!-- ✏️ EDIT: one-line introduction of your daily life -->
+    <p class="page-intro">
+      Life is research and research is life.
+    </p>
+
+    <!-- ✏️ EDIT: copy this whole <figure> block to add more photos -->
+    <figure class="photo-row">
+      <img src="gallery/battle.jpg"
+           alt="Playing music">
+      <figcaption>A spirited debate with a retiree at the campus gate who claimed he could predict earthquakes</figcaption>
+    </figure>
+
+    <figure class="photo-row">
+      <img src="gallery/Ziyi.jpg"
+           alt="Daily life 2">
+      <figcaption>A photo with Dr. Ziyi Zhao of Princeton University</figcaption>
+    </figure>
+
+    <figure class="photo-row">
+      <img src="gallery/Greg.jpg"
+           alt="Daily life 3">
+      <figcaption>A photo with Professor Greg Beroza of Stanford, one of the early pioneers of AI for seismology</figcaption>
+    </figure>
+
+    <figure class="photo-row">
+      <img src="gallery/Ivan_Koulakov.jpg"
+           alt="Daily life 4">
+      <figcaption>A photo with Ivan Koulakov of the Skolkovo Institute of Science and Technology, who was a famous Russian painter in his youth</figcaption>
+    </figure>
+
+    <figure class="photo-row">
+      <img src="gallery/Erdinc_Sanin.jpg"
+           alt="Daily life 4">
+      <figcaption>A photo with Erdinc Sanin, a 4D seismologist at CSIRO in Perth, Australia</figcaption>
+    </figure>    
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <!-- ✏️ EDIT: footer line -->
+  <p>© 2026 Mingteng (Minton) Tian · <a href="mailto:your.email@university.edu">12432250@mail.sustech.edu.cn</a></p>
+</footer>
+
+<script>
+/* Page switching: shows one "page" at a time with a soft fade,
+   and moves the black underline in the navigation bar. */
+(function () {
+  var pageLinks = document.querySelectorAll('[data-page]');
+  var navLinks = document.querySelectorAll('.nav-link');
+  var pages = document.querySelectorAll('.page');
+  var valid = ['home', 'research', 'ccfrl', 'fieldwork', 'gallery'];
+
+  function showPage(id) {
+    var navPage = id === 'ccfrl' ? 'research' : id;
+    pages.forEach(function (p) {
+      p.classList.toggle('active', p.id === 'page-' + id);
+    });
+    navLinks.forEach(function (l) {
+      l.classList.toggle('active', l.getAttribute('data-page') === navPage);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  pageLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var id = this.getAttribute('data-page');
+      showPage(id);
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  /* open the page written in the URL hash (if any) */
+  var hash = location.hash.replace('#', '');
+  showPage(valid.indexOf(hash) > -1 ? hash : 'home');
+})();
+</script>
+
+</body>
+</html>
