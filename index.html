@@ -299,6 +299,24 @@ a{ color:var(--ink); }
   color:var(--muted);
   text-align:center;
 }
+.video-row{
+  margin-bottom:52px;
+}
+.video-row video{
+  width:100%;
+  max-height:75vh;
+  display:block;
+  object-fit:contain;
+  background:#000;
+  border:1px solid var(--line);
+}
+.video-row figcaption{
+  min-height:1.6em;
+  margin-top:8px;
+  font-size:calc(.8rem + 6px);
+  color:var(--muted);
+  text-align:center;
+}
 
 /* ---------- FOOTER ---------- */
 footer{
@@ -580,7 +598,7 @@ footer{
     <figure class="photo-row">
       <img src="fieldwork/launch.jpg"
            alt="Field work 1">
-      <figcaption>The First Launch of HaiNan Plume Project</figcaption>
+      <figcaption>The First Launch of HaiNan Plume Project(2026/1/10)</figcaption>
     </figure>
     
     <figure class="photo-row">
@@ -604,13 +622,38 @@ footer{
     <figure class="photo-row">
       <img src="fieldwork/pineapple.jpg"
            alt="Field work 3">
-      <figcaption>Eating Pineapple after one day's fieldwork</figcaption>
+      <figcaption>Eating Pineapple after one day's fieldwork(2026/8/4)</figcaption>
     </figure>
     
     <figure class="photo-row">
       <img src="fieldwork/selfie.jpg"
            alt="Field work 3">
       <figcaption>Working outdoors in the midday heat</figcaption>
+    </figure>
+
+    <!-- ✏️ EDIT: field-work videos; replace the blank figcaption space with your legend -->
+    <figure class="video-row">
+      <video controls preload="metadata" playsinline>
+        <source src="fieldwork/VID_20230714_081213.mp4" type="video/mp4">
+        Your browser does not support MP4 video playback.
+      </video>
+      <figcaption>&nbsp;Gravity Exploration Field Work in Liaoning(2023/7/14)</figcaption>
+    </figure>
+
+    <figure class="video-row">
+      <video controls preload="metadata" playsinline>
+        <source src="fieldwork/mmexport1693581349384.mp4" type="video/mp4">
+        Your browser does not support MP4 video playback.
+      </video>
+      <figcaption>&nbsp;Squeezing sweat in my cloth(2023/7)</figcaption>
+    </figure>
+
+    <figure class="video-row">
+      <video controls preload="metadata" playsinline>
+        <source src="fieldwork/wx_camera_1689147670156.mp4" type="video/mp4">
+        Your browser does not support MP4 video playback.
+      </video>
+      <figcaption>&nbsp;Measuring Altitude(2023/7)</figcaption>
     </figure>
   </section>
 
