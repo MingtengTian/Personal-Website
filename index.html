@@ -198,7 +198,7 @@ a{ color:var(--ink); }
   display:flex;
   gap:36px;
   margin-bottom:60px;
-  align-items:flex-start;
+  align-items:center;
 }
 .research-media{
   flex:0 0 42%;
@@ -220,10 +220,19 @@ a{ color:var(--ink); }
   margin-bottom:10px;
   text-align:justify;
 }
-.research-text .proj-note{
+.proj-note{
   font-size:calc(.85rem + 4px);
   color:var(--muted);
   font-style:italic;
+}
+.proj-note a{
+  text-decoration:underline;
+  text-underline-offset:2px;
+  overflow-wrap:anywhere;
+}
+.publication-notice{
+  color:#8a3f00;
+  font-weight:bold;
 }
 .research-title-link{
   color:inherit;
@@ -234,12 +243,26 @@ a{ color:var(--ink); }
   color:#555;
 }
 
-/* ---------- CCFRL RESEARCH DETAIL PAGE ---------- */
+/* ---------- RESEARCH DETAIL PAGES ---------- */
 .detail-back{
   display:inline-block;
   margin-bottom:24px;
   font-size:calc(.95rem + 4px);
   font-weight:bold;
+}
+.research-detail-summary{
+  margin-bottom:52px;
+  padding:22px 24px;
+  background:var(--nav-bg);
+  border-left:4px solid var(--ink);
+}
+.research-detail-summary p{
+  font-size:calc(.95rem + 4px);
+  margin-bottom:12px;
+  text-align:justify;
+}
+.research-detail-summary p:last-child{
+  margin-bottom:0;
 }
 .research-detail-row{
   margin-bottom:64px;
@@ -255,6 +278,9 @@ a{ color:var(--ink); }
   line-height:1.6;
   color:var(--ink);
   text-align:left;
+}
+.research-detail-row .editable-caption{
+  min-height:1.6em;
 }
 
 /* ---------- FIELD WORK & GALLERY (one image per row,
@@ -354,7 +380,7 @@ footer{
           <!-- ✏️ EDIT: your degrees, newest first -->
           <ul>
             <li>[2024.9–2027.6] &nbsp; M.Sc. in Geophysics, Southern Univeristy of Science and Technology, China</li>
-            <li>[2020.9–2024.6] &nbsp; B.Sc. in Applied Geophysics, Jilin Univeristy, China</li>
+            <li>[2020.9–2024.6] &nbsp; B.E. in Applied Geophysics, Jilin Univeristy, China</li>
           </ul>
         </div>
 
@@ -405,18 +431,11 @@ footer{
       <div class="research-media">
         <!-- ✏️ EDIT: image for research project 1 -->
         <img src="research/DispSAC/LOGO.png"
-             alt="Research project 1">
+             alt="DispSAC research logo">
       </div>
       <div class="research-text">
-        <!-- ✏️ EDIT: title and description of project 1 -->
-        <h3>DispSAC Poster in PIM (Passive Imaging and Monitoring in Wave Physics:From Seismology to Ultrasound (Asia-Pacific) Summer School)</h3>
-        <p>
-          <strong>Research Gap:</strong> SWI based on MCMC is very time intensive; Linearized inversion is very easily stuck into local minimum; SWI based on Supervised Learning ignores non-uniqueness nature of inverse problem
-        </p>
-        <p>
-          <strong>Solution:</strong> To addrease this problem, We propose DispSAC to fully explore parameter space by leveraging fewer forword simulations over MCMC
-        </p>
-        <p class="proj-note"><strong>Related publication:</strong> [<strong>DOI:</strong> <a href="https://doi.org/10.31223/X5MJ75">https://doi.org/10.31223/X5MJ75</a>]</p>
+        <!-- ✏️ EDIT: linked title of project 1 -->
+        <h3><a href="#dispsac" class="research-title-link internal-page-link" data-page="dispsac">Surface Wave Inversion Based on SAC algorithm of Off-policy Reinforce Learning</a></h3>
       </div>
     </div>
 
@@ -429,26 +448,82 @@ footer{
              width="1536" height="1024">
       </div>
       <div class="research-text">
-        <!-- ✏️ EDIT: title and description of project 2 -->
+        <!-- ✏️ EDIT: linked title of project 2 -->
         <h3><a href="#ccfrl" class="research-title-link internal-page-link" data-page="ccfrl">CCFRL for direct inference of shear wave velocity from ambient noise cross correlations</a></h3>
-        <p>
-          <strong>Research Gap:</strong> Traditional Ambient Noise tomography extracts dispersion measurements before inverting for velocity structure, making the final models sensitive to dispersion picking and quality control.
-        </p>
-        <p>
-          <strong>Solution:</strong> We present CCFRL, a reinforcement-learning framework that estimates an effective one-dimensional shear-wave velocity model directly from a preprocessed interstation CCF, which skips the dispersion picking process directly
-        </p>
-        <p class="proj-note"><strong>Related publication:</strong> [<strong>DOI:</strong> https://drive.google.com/file/d/1mJ27eYjjaqdzgtWQ0y7L7SATXfbgA1pY/view?usp=sharinge/d/1mJ27eYjjaqdzgtWQ0y7L7SATXfbgA1pY/view?usp=sharing</a>]</p>
       </div>
     </div>
   </section>
 
+  <!-- ================= DISPSAC RESEARCH DETAIL PAGE ================= -->
+  <section class="page" id="page-dispsac">
+    <a href="#research" class="detail-back internal-page-link" data-page="research">Back to Research</a>
+    <h2 class="page-title">Surface Wave Inversion Based on SAC algorithm of Off-policy Reinforce Learning</h2>
+    <p class="page-intro">
+      Detailed DispSAC results for surface-wave inversion using the Soft Actor-Critic algorithm.
+    </p>
+
+    <div class="research-detail-summary">
+      <p><strong>Research Gap:</strong> SWI based on MCMC is very time intensive; Linearized inversion is very easily stuck into local minimum; SWI based on Supervised Learning ignores non-uniqueness nature of inverse problem</p>
+      <p><strong>Solution:</strong> To addrease this problem, We propose DispSAC to fully explore parameter space by leveraging fewer forword simulations over MCMC</p>
+      <p class="proj-note"><strong>Related publication:</strong> [<strong>DOI:</strong> <a href="https://doi.org/10.31223/X5MJ75" target="_blank" rel="noopener noreferrer">https://doi.org/10.31223/X5MJ75</a>]</p>
+    </div>
+
+    <figure class="research-detail-row">
+      <img src="research/DispSAC/training_loss.png"
+           alt="DispSAC training loss" loading="lazy">
+      <figcaption class="editable-caption">&nbsp;<!-- ✏️ EDIT: replace this blank space with your explanation of the training loss. --></figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/DispSAC/WUS.png"
+           alt="DispSAC results for the western United States" loading="lazy">
+      <figcaption class="editable-caption">&nbsp;<!-- ✏️ EDIT: replace this blank space with your explanation of the WUS results. --></figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/DispSAC/SET.png"
+           alt="DispSAC SET results" loading="lazy">
+      <figcaption class="editable-caption">&nbsp;<!-- ✏️ EDIT: replace this blank space with your explanation of the SET results. --></figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/DispSAC/efficiency.png"
+           alt="DispSAC computational efficiency comparison" loading="lazy">
+      <figcaption class="editable-caption">&nbsp;<!-- ✏️ EDIT: replace this blank space with your explanation of the efficiency results. --></figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/DispSAC/fitting.png"
+           alt="DispSAC data fitting results" loading="lazy">
+      <figcaption class="editable-caption">&nbsp;<!-- ✏️ EDIT: replace this blank space with your explanation of the fitting results. --></figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/DispSAC/mechanism.png"
+           alt="DispSAC inversion mechanism" loading="lazy">
+      <figcaption class="editable-caption">&nbsp;<!-- ✏️ EDIT: replace this blank space with your explanation of the mechanism. --></figcaption>
+    </figure>
+
+    <figure class="research-detail-row">
+      <img src="research/DispSAC/poster.png"
+           alt="DispSAC research poster" loading="lazy">
+      <figcaption class="editable-caption">&nbsp;<!-- ✏️ EDIT: replace this blank space with your explanation of the poster. --></figcaption>
+    </figure>
+  </section>
+
   <!-- ================= CCFRL RESEARCH DETAIL PAGE ================= -->
   <section class="page" id="page-ccfrl">
-    <a href="#research" class="detail-back internal-page-link" data-page="research">&larr; Back to Research</a>
+    <a href="#research" class="detail-back internal-page-link" data-page="research">Back to Research</a>
     <h2 class="page-title">CCFRL Research Details</h2>
     <p class="page-intro">
       Detailed CCFRL results for direct inference of shear-wave velocity from ambient-noise cross-correlation functions.
     </p>
+
+    <div class="research-detail-summary">
+      <p><strong>Research Gap:</strong> Traditional Ambient Noise tomography extracts dispersion measurements before inverting for velocity structure, making the final models sensitive to dispersion picking and quality control.</p>
+      <p><strong>Solution:</strong> We present CCFRL, a reinforcement-learning framework that estimates an effective one-dimensional shear-wave velocity model directly from a preprocessed interstation CCF, which skips the dispersion picking process directly</p>
+      <p class="proj-note"><strong>Related Manuscript:</strong> [<span class="publication-notice">Not published, please don't propagate</span> — <a href="https://drive.google.com/file/d/1mJ27eYjjaqdzgtWQ0y7L7SATXfbgA1pY/view?usp=sharing" target="_blank" rel="noopener noreferrer">https://drive.google.com/file/d/1mJ27eYjjaqdzgtWQ0y7L7SATXfbgA1pY/view?usp=sharing</a>]</p>
+    </div>
 
     <figure class="research-detail-row">
       <img src="research/CCFRL/Misfit.png"
@@ -636,10 +711,10 @@ footer{
   var pageLinks = document.querySelectorAll('[data-page]');
   var navLinks = document.querySelectorAll('.nav-link');
   var pages = document.querySelectorAll('.page');
-  var valid = ['home', 'research', 'ccfrl', 'fieldwork', 'gallery'];
+  var valid = ['home', 'research', 'dispsac', 'ccfrl', 'fieldwork', 'gallery'];
 
   function showPage(id) {
-    var navPage = id === 'ccfrl' ? 'research' : id;
+    var navPage = (id === 'dispsac' || id === 'ccfrl') ? 'research' : id;
     pages.forEach(function (p) {
       p.classList.toggle('active', p.id === 'page-' + id);
     });
